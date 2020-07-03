@@ -19,24 +19,25 @@ SonarReader::SonarReader(ros::NodeHandle& nh, ros::NodeHandle& nh_private) {
     ros::Rate r(pub_rate_);
     while (ros::ok()) {
       sonar_ser_.write(GET_DATA_CMD, cmd_len);
-      //   ros::Duration(0.01).sleep();
-      if (sonar_ser_.available() > 13) {
-        uint8_t* data;
-        sonar_ser_.read(data, 13);
-        Int2Byte tfr;
-
-        for (size_t i = 0; i < 4; i++) {
-          tfr.byte[0] = data[5 + i * 2];
-          tfr.byte[1] = data[5 + i * 2 - 1];
-          ranges[i] = tfr.num;
-        }
-
-        sensor_msgs::LaserEcho echo;
-        for (auto echo_data : ranges) {
-          echo.echoes.push_back(echo_data);
-        }
-        sonar_pub_.publish(echo);
+      while (sonar_ser_.available() < 13) {
+        ros::Duration(0.005).sleep();
       }
+
+      uint8_t* data;
+      sonar_ser_.read(data, 13);
+      Int2Byte tfr;
+
+      for (size_t i = 0; i < 4; i++) {
+        tfr.byte[0] = data[5 + i * 2];
+        tfr.byte[1] = data[5 + i * 2 - 1];
+        ranges[i] = tfr.num;
+      }
+
+      sensor_msgs::LaserEcho echo;
+      for (auto echo_data : ranges) {
+        echo.echoes.push_back(echo_data);
+      }
+      sonar_pub_.publish(echo);
 
       ros::spinOnce();
       r.sleep();

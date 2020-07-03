@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="sonar_array" type="sonar_reader_node" name="sonar_reader_node" >
+    <param name="port_id" value="/dev/ttyUSB0" /> 
+    <param name="baud_rate" value="9600" />
+    <param name="pub_rate" value="10.0" />
+    <param name="sonar_topic_name" value="sonar" />
+  </node>
+</launch>
