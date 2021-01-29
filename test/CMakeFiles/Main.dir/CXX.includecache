@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/sgl/catkin_new/src/sonar_array/test/crcCompute.cpp
+crcCompute.h
+/home/sgl/catkin_new/src/sonar_array/test/crcCompute.h
+
+/home/sgl/catkin_new/src/sonar_array/test/crcCompute.h
+stdint.h
+-
+
+/home/sgl/catkin_new/src/sonar_array/test/crc_test.cpp
+crcCompute.h
+/home/sgl/catkin_new/src/sonar_array/test/crcCompute.h
+iostream
+-
+stdio.h
+-
+

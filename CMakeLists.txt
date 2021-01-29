@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(sonar_array)
-
+SET(CMAKE_BUILD_TYPE Debug)
 add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
@@ -27,5 +27,7 @@ include_directories(
 add_executable(sonar_reader_node 
   src/sonar_reader_node.cpp
   src/sonar_reader.cpp
+  #src/crcCompute.cpp
+
   )
 target_link_libraries(sonar_reader_node ${catkin_LIBRARIES})
